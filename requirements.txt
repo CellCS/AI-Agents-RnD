@@ -1,0 +1,6 @@
+pyyaml
+pandas
+requests
+ollama
+openai
+python-dotenv
