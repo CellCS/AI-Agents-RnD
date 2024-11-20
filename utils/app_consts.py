@@ -31,3 +31,17 @@ azure_openai_llm_modelversions=os.getenv('AZURE_OPENAI_LLM_MODELS_VERSIONS', '')
 # OpenAI
 openai_apikey = os.getenv('OPENAI_API_KEY', '')
 openai_llm_models=os.getenv('OPENAI_LLM_MODELS', '').split(',')
+
+
+### Magentic-One
+azure_chatcompletionclient = {
+  "api_version": "2024-02-15-preview",
+  "azure_endpoint": azure_openai_endpoint,
+  "model_capabilities": {
+    "function_calling": True,
+    "json_output": True,
+    "vision": True
+  },
+  "azure_ad_token_provider": "DEFAULT",
+  "model": "gpt-4o-2024-05-13"
+}

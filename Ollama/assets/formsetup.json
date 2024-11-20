@@ -1,0 +1,125 @@
+{
+   "page":3,
+   "fields":[
+      {
+         "field_name":"SITE ID",
+         "id":10776,
+         "type":"Number",
+         "value":""
+      },
+      {
+         "field_name":"SUBJECT INITIAL",
+         "id":10777,
+         "type":"String",
+         "value":""
+      },
+      {
+         "field_name":"SUBJECT ID",
+         "id":10778,
+         "type":"Number",
+         "value":""
+      },
+      {
+         "field_name":"SMOKING HISTORY",
+         "id":10779,
+         "type":"checkbox",
+         "Choices":[
+            {
+               "label":"Non smoker",
+               "value":""
+            },
+            {
+               "label":"Smoker",
+               "value":""
+            },
+            {
+               "label":"Ex-smaker",
+               "value":""
+            }
+         ]
+      },
+      {
+         "field_name":"Date of onset of symptoms",
+         "id":10780,
+         "type":"date",
+         "format":"dd/mmm/yyyy",
+         "value":""
+      },
+      {
+         "field_name":"Date of Diagnosis",
+         "id":10781,
+         "type":"date",
+         "format":"dd/mmm/yyyy",
+         "value":""
+      },
+      {
+         "field_name":"Index Joint AREA",
+         "id":10782,
+         "type":"checkbox",
+         "Choices":[
+            {
+               "label":"Hip",
+               "value":""
+            },
+            {
+               "label":"Knee",
+               "value":""
+            },
+            {
+               "label":"Shoulder",
+               "value":""
+            },
+            {
+               "label":"Wrist",
+               "value":""
+            },
+            {
+               "label":"Neck",
+               "value":""
+            }
+         ]
+      },
+      {
+         "field_name":"Index Joint SIDE",
+         "id":10783,
+         "type":"checkbox",
+         "Choices":[
+            {
+               "label":"Left",
+               "value":""
+            },
+            {
+               "label":"Right",
+               "value":""
+            }
+         ]
+      },
+      {
+         "field_name":"Treatmentfor OA",
+         "id":10784,
+         "type":"checkbox",
+         "Choices":[
+            {
+               "label":"NA",
+               "value":""
+            },
+            {
+               "label":"Corticosteroids",
+               "value":""
+            },
+            {
+               "label":"Hyaluronic Acid",
+               "value":""
+            },
+            {
+               "label":"NSAIDs",
+               "value":""
+            },
+            {
+               "label":"Other",
+               "value":""
+            }
+         ]
+      }
+   ]
+}
