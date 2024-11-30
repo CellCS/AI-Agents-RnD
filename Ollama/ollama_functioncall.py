@@ -69,6 +69,9 @@ if __name__ == "__main__":
     )
     print(response)
     decodefunction_response(response,available_functions)
+
+
+    
     response = ollama.chat(
         'llama3.2',
         messages=[
