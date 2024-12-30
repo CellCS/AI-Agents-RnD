@@ -1,0 +1,33 @@
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: open-webui-ollama
+    pull_policy: always
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    volumes:
+      - ./volumes/ollama:/root/.ollama
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    pull_policy: always
+    restart: unless-stopped
+    depends_on:
+      - ollama
+    ports:
+      - "3000:8080"
+    environment:
+      - 'OLLAMA_BASE_URL=http://open-webui-ollama:11434'
+      - "OPENAI_API_BASE_URL=https://api.openai.com/v1"
+      - "OPENAI_API_KEY=your_api_key"
+      - "RAG_EMBEDDING_MODEL_TRUST_REMOTE_CODE=True"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./volumes/open-webui:/app/backend/data
