@@ -88,5 +88,7 @@ It’s crucial to set the OpenAI API key or other LLMs providers key here. If yo
 ## References
 
 [Ollama website](https://ollama.com/)
+
 [Ollama models](https://ollama.com/search)
+
 [Use Ollama with any GGUF Model on Hugging Face Hub](https://huggingface.co/docs/hub/en/ollama)
