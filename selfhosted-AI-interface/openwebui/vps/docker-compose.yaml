@@ -1,0 +1,78 @@
+services:
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:latest
+    pull_policy: always
+    tty: true
+    ports:
+      - 7869:11434
+    volumes:
+      - ./volumes/ollama:/root/.ollama
+    restart: unless-stopped
+    networks:
+      - openwebui_network
+    
+  open-webui:
+    container_name: open-webui
+    image: ghcr.io/open-webui/open-webui:main
+    environment:
+      - "OLLAMA_API_BASE_URL=http://ollama:11434/api"
+      - "OPENAI_API_BASE_URL=http://open-webui-litellm:8000/v1"
+      - "OPENAI_API_KEY=your-liteLLM-MasterKey"
+      - "RAG_EMBEDDING_MODEL_TRUST_REMOTE_CODE=True"
+    ports:
+      - 3000:8080
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./ollama-webui/data:/app/backend/data
+    restart: unless-stopped
+    networks:
+      - openwebui_network
+
+  litellm-proxy:
+    container_name: open-webui-litellm
+    image: ghcr.io/berriai/litellm:main-latest
+    environment:
+      - "OPENAI_API_KEY={your-OpenAI-APIKey}"
+    volumes:
+      - ./litellm/config.yaml:/app/config.yaml
+    command:
+      ["--config", "/app/config.yaml", "--port", "8000", "--detailed_debug"]
+    restart: unless-stopped
+    networks:
+      - openwebui_network
+
+  db:
+    container_name: open-webui-db
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: litellmdatabase
+    volumes:
+      - ./volumes/pgdata:/var/lib/postgresql/data
+    networks:
+      - openwebui_network
+
+  nginx:
+      container_name: open-webui-nginx
+      image: nginx:latest
+      ports:
+        - 443:443
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./nginx/certs:/etc/nginx/certs
+      depends_on:
+        - open-webui
+        - litellm-proxy
+      restart: unless-stopped
+      networks:
+        - openwebui_network
+
+
+networks:
+  openwebui_network:
+    external: true
