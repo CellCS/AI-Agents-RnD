@@ -44,6 +44,7 @@ Docker Compose Services:
 **2. Setup SSL with Nginx**
 
 In the nginx directory, ensure your SSL certificates are correctly placed and your [nginx.conf](./nginx/nginx.conf) file is correctly configured. Replace "your-domainname.com" with your domain name.
+Note: if you meet WebSocket error and show "No network" in chat dialog, here is [github issue](https://github.com/open-webui/open-webui/issues/8074). Following configure file includes this fix.
 
 ```conf
 events {
@@ -63,10 +64,21 @@ http {
 
         location / {
             proxy_pass http://open-webui:8080;
+
+            # Add WebSocket support
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+
+            # Standard headers
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
+
+            # Timeouts for WebSocket connections
+            proxy_read_timeout 60s;
+            proxy_send_timeout 60s;
         }
 
     }
@@ -109,9 +121,15 @@ litellm_settings:
 docker-compose up -d
 ```
 
+![image1](./assets/vps-1.png)
+
+![image2](./assets/vps-2.png)
+
 ```batch
 docker exec -it ollama ollama pull nomic-embed-text
 ```
+
+![image2](./assets/vps-3.png)
 
 **5. Verify Your Setupe**
 
@@ -119,6 +137,16 @@ Once the services are running, verify the setup:
 
 Access the UI at https://your-hostdomain.com or your specific domain.
 Ensure all services are up and running without errors using docker-compose logs.
+
+**6 (Optional) LiteLLM**
+
+LiteLLM handles loadbalancing, fallbacks and spend tracking across 100+ LLMs. all in the OpenAI format. In web host server, we use LiteLLM to manager our LLM and related API key usage. Also this protect our primary OpenAI API Key. Check [LiteLLM Dococument](https://docs.litellm.ai/docs/).
+
+![image2](./assets/vps-litellm-1.png)
+
+![image2](./assets/vps-litellm-2.png)
+
+![image2](./assets/vps-litellm-4.png)
 
 **7 (Optional) Update Image Version or Shutdown**
 
@@ -146,3 +174,7 @@ docker compose pull
 [Ollama models](https://ollama.com/search)
 
 [Use Ollama with any GGUF Model on Hugging Face Hub](https://huggingface.co/docs/hub/en/ollama)
+
+[LiteLLM](https://www.litellm.ai/)
+
+[LiteMM Dococument](https://docs.litellm.ai/docs/)
