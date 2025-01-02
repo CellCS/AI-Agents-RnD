@@ -40,3 +40,6 @@ From study design to patient recruitment, researchers are investigating ways tha
 
 [Matching patients to clinical trials with large language models](https://www.nature.com/articles/s41467-024-53081-z)
 
+## Agents
+
+[Agents_Are_Not_Enough 19 Dec 2024](./assets/Agents_Are_Not_Enough.pdf)
