@@ -16,7 +16,6 @@ async def main():
     async with agent.run_stream("What is the capital of the UK?") as response:
         print(await response.get_data())
 
-
 asyncio.run(main())
 
 
