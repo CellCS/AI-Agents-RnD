@@ -16,7 +16,7 @@ client_azure = AsyncAzureOpenAI(
     api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
 )
 
-
+openai_key=os.getenv("OPENAI_API_KEY", "")
 model_openai = OpenAIModel("gpt-4o", api_key=os.getenv("OPENAI_API_KEY", ""))
 model_openaiAzure = OpenAIModel("gpt-4o", openai_client=client_azure)
 model_ollama = OllamaModel(
