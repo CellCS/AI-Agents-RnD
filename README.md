@@ -7,3 +7,12 @@ Welcome to AI-Agents-RnD! This repository is dedicated to research and developme
 **Research Papers:** A curated collection of influential papers and articles on autonomous AI agents, agentic architectures, and related research fields.
 
 **Experimental Insights:** Explorations and notes on experiments, performance metrics, and findings that may support future advancements in AI agents.
+
+## Example List
+
+Ollama: LLMs, Agent
+Magentic One:
+PydanticAI:
+Autoscraper:
+Browser use:
+OpenWebUI:
