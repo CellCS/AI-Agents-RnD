@@ -8,6 +8,8 @@ load_dotenv(dotenv_path=dotenv_path)
 
 ai_clients=["ollama","openai","azure", "lmstudio"]
 
+openai_key=os.getenv("OPENAI_API_KEY", "")
+
 # LLMs
 ollama_host_url = os.getenv('OLLAMA_HOST_URL', 'http://localhost')
 ollama_host_port=int(os.getenv('OLLAMA_HOST_PORT', '11434'))

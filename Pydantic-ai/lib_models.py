@@ -24,6 +24,8 @@ model_ollama = OllamaModel(
     base_url="http://localhost:11434/v1",
 )
 
+nvidia_api_key=os.getenv("NVIDIA_API_KEY", "")
+
 
 def get_model_openai(modelname: str):
     return OpenAIModel(modelname, api_key=os.getenv("OPENAI_API_KEY", ""))
